@@ -43,7 +43,15 @@ const main = (topoData, countyData) => {
     .style("border-radius", "5px")
     .style("display", "block")
     .style("margin", "auto");
-
+  //create the tooltip
+  const tooltip = d3
+    .select("body")
+    .append("div")
+    .attr("id", "tooltip")
+    .style("background-color", "lightgray")
+    .style("font-size", "20px")
+    .style("border-radius", "5px")
+    .style("opacity", 0);
   //create the counties
   map
     .selectAll("path")
@@ -78,6 +86,24 @@ const main = (topoData, countyData) => {
       if (percentEdu > 24) {
         return "#12303b";
       }
+    })
+    //add in the tooltip
+    .on("mouseover", (d) => {
+      let id = d.id;
+      let matchedCounty = countyData.find((element) => {
+        return element["fips"] === id;
+      });
+      let percentEdu = matchedCounty.bachelorsOrHigher;
+      tooltip.attr("data-education", percentEdu);
+      tooltip.html(percentEdu + "%");
+      tooltip.style("opacity", 0.9);
+      tooltip.attr("data-fips", d.id);
+      tooltip.style("position", "absolute");
+      tooltip.style("left", d3.event.pageX - 10 + "px");
+      tooltip.style("top", d3.event.pageY - 50 + "px");
+    })
+    .on("mouseout", (d) => {
+      tooltip.style("opacity", "0");
     });
   //create the legend
   const legend = map
