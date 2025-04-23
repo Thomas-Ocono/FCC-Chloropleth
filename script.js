@@ -79,4 +79,48 @@ const main = (topoData, countyData) => {
         return "#12303b";
       }
     });
+  //create the legend
+  const legend = map
+    .append("g")
+    .attr("id", "legend")
+    .attr("transform", "translate(700, 620)");
+  legend
+    .append("rect")
+    .attr("height", 25)
+    .attr("width", 50)
+    .attr("fill", "#d8ecf3");
+  legend.append("text").text("<12%").style("font-size", "12px");
+  legend
+    .append("rect")
+    .attr("height", 25)
+    .attr("width", 50)
+    .attr("fill", "#8ac5db")
+    .attr("transform", "translate(50,0)");
+  legend
+    .append("text")
+    .text("12%-17%")
+    .style("font-size", "12px")
+    .attr("transform", "translate(50,0)");
+  legend
+    .append("rect")
+    .attr("height", 25)
+    .attr("width", 50)
+    .attr("fill", "#307f9c")
+    .attr("transform", "translate(100,0)");
+  legend
+    .append("text")
+    .text("17%-24%")
+    .style("font-size", "12px")
+    .attr("transform", "translate(105,0)");
+  legend
+    .append("rect")
+    .attr("height", 25)
+    .attr("width", 50)
+    .attr("fill", "#12303b")
+    .attr("transform", "translate(150,0)");
+  legend
+    .append("text")
+    .text(">24%")
+    .style("font-size", "12px")
+    .attr("transform", "translate(165,0)");
 };
